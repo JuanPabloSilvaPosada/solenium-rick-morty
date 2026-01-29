@@ -1,6 +1,9 @@
-.loader {
+.loader__text {
+  margin: 0;
   text-align: center;
-  font-size: clamp(32px, 4vw, 64px);
-  font-family: "getSchwifty";
+  font-size: clamp(32px, 4vw, 56px);
+  font-family: "getSchwifty", sans-serif;
+  font-weight: 500;
   color: var(--color-cian);
+  line-height: 1.4;
 }

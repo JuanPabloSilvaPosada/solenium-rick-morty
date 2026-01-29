@@ -11,7 +11,7 @@ const Loader = () => {
     return () => clearInterval(dotsInterval);
   }, []);
 
-  return <p className="loader">Buscando{dots}</p>;
+  return <p className="loader__text">Buscando{dots}</p>;
 };
 
 export default Loader;
