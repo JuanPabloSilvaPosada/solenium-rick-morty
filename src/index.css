@@ -3,56 +3,91 @@
   src: url('./assets/fonts/get_schwifty.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: block; /* Evita mostrar fuente del sistema: el texto espera hasta que cargue tu fuente (máx. ~3s) */
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'WubbaLubbaDubDub';
+  src: url('./assets/fonts/WubbaLubbaDubDub.ttf') format('truetype'),
+       url('./assets/fonts/WubbaLubbaDubDub.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
 }
 
 :root {
-  font-family: 'getSchwifty', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'WubbaLubbaDubDub', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Variables */
+  /* Paleta base */
   --color-cian: #a9f3fd;
   --color-green: #7cf448;
+
+  /* Variables derivadas de cian y green (modo oscuro) */
+  --color-cian-dim: color-mix(in srgb, var(--color-cian) 75%, black);
+  --color-green-dim: color-mix(in srgb, var(--color-green) 75%, black);
+  --color-bg: color-mix(in srgb, var(--color-green) 6%, #1a1a1a);
+  --color-text: color-mix(in srgb, var(--color-cian) 90%, white);
+  --color-link: var(--color-cian);
+  --color-link-hover: var(--color-green);
+  --color-button-bg: color-mix(in srgb, var(--color-green) 4%, #1a1a1a);
+  --color-button-border: var(--color-cian-dim);
+  --color-button-border-hover: var(--color-cian);
+
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-link);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-link-hover);
 }
 
+html,
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
+  width: 100%;
   min-width: 320px;
   min-height: 100vh;
   font-family: 'getSchwifty', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+body {
+  display: flex;
+  place-items: center;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 h1 {
-  font-size: 3.2em;
+  font-size: 51px;
   line-height: 1.1;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 10px 19px;
+  font-size: 16px;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -69,13 +104,12 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    --color-bg: color-mix(in srgb, var(--color-cian) 8%, #ffffff);
+    --color-text: color-mix(in srgb, var(--color-green) 30%, #213547);
+    --color-link: var(--color-green-dim);
+    --color-link-hover: var(--color-green);
+    --color-button-bg: color-mix(in srgb, var(--color-cian) 15%, #ffffff);
+    --color-button-border: var(--color-green-dim);
+    --color-button-border-hover: var(--color-green);
   }
 }
