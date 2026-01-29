@@ -17,13 +17,17 @@ export const useCharacterSearch = () => {
         setError(null);
         setCharacters([]);
 
+        // Tiempo de carga mínimo
+        const startTime = Date.now();
+        const minLoadingTime = 2000;
+
         try {
             const data = await getCharacters(params);
 
             setInfo(data.info);
             setCurrentPage(params.page || 1);
 
-            if(data.results.length === 0) {
+            if (data.results.length === 0) {
                 setError('No se encontraron personajes');
             } else {
                 setCharacters(data.results);
@@ -31,8 +35,17 @@ export const useCharacterSearch = () => {
         } catch (error) {
             setError(error.message);
         } finally {
-            // Cambiar estado de loading a false
-            setLoading(false);
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = minLoadingTime - elapsedTime;
+
+            if (remainingTime > 0) {
+                setTimeout(() => {
+                    setLoading(false);
+                }, remainingTime);
+            } else {
+                // Al pasar 2 segundos desactiva el loader
+                setLoading(false);
+            }
         }
     }
 
