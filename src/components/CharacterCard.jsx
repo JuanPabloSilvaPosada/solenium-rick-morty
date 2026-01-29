@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "./CharacterCard.css";
 
 const CharacterCard = ({ character }) => {
+  const [imageError, setImageError] = useState(false);
+
   const statusClass =
     character.status?.toLowerCase() === "alive"
       ? "character-card__status--alive"
@@ -10,11 +13,22 @@ const CharacterCard = ({ character }) => {
 
   return (
     <article className="character-card">
-      <img
-        src={character.image}
-        alt={character.name}
-        className="character-card__image"
-      />
+      <div className="character-card__image-wrap">
+        {imageError ? (
+          <div className="character-card__image-placeholder" aria-hidden>
+            {character.name?.charAt(0) ?? "?"}
+          </div>
+        ) : (
+          <img
+            src={character.image}
+            alt={character.name}
+            className="character-card__image"
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageError(true)}
+          />
+        )}
+      </div>
       <div className="character-card__info">
         <h3 className="character-card__name">{character.name}</h3>
         <p className="character-card__meta">

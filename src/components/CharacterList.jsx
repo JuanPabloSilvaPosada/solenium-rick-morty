@@ -8,11 +8,10 @@ const CharacterList = ({ characters, info, currentPage }) => {
     <div className="character-list">
       <div className="character-list__header">
         <h2 className="character-list__title">
-          Personajes encontrados: {characters.length}
+          Personajes encontrados: {info.count}
         </h2>
         <p className="character-list__meta">
-          Página {currentPage} de {info?.pages ?? "?"}
-          {info && ` · ${info.count} personajes · ${info.pages} páginas`}
+          Página {currentPage} de {info.pages ?? "?"}
         </p>
       </div>
       <ul className="character-list__grid">
