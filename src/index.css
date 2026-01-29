@@ -1,5 +1,13 @@
+@font-face {
+  font-family: 'getSchwifty';
+  src: url('./assets/fonts/get_schwifty.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block; /* Evita mostrar fuente del sistema: el texto espera hasta que cargue tu fuente (máx. ~3s) */
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'getSchwifty', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,6 +19,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Variables */
+  --color-cian: #a9f3fd;
+  --color-green: #7cf448;
 }
 
 a {
@@ -28,6 +40,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'getSchwifty', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {
