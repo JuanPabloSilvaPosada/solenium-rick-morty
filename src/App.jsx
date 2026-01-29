@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react";
+import { useCharacterSearch } from "./hooks/useCharacterSearch";
+import Loader from "./components/Loader";
+import ErrorMessage from "./components/ErrorMessage";
+import SearchForm from "./components/SearchForm";
+import CharacterList from "./components/CharacterList";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { characters, loading, error, info, currentPage, searchCharacters } =
+    useCharacterSearch();
+
+  useEffect(() => {
+    // Cargar por defecto los primeros 20 resultados que envia la API
+    searchCharacters({ page: 1 });
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <header className="app__header">
+        <h1 className="app__title">Rick and Morty</h1>
+        <SearchForm searchCharacters={searchCharacters} loading={loading} />
+      </header>
+
+      <section className="app__content">
+        {loading && <Loader />}
+
+        {error && !loading && <ErrorMessage message={error} />}
+
+        {!loading && !error && characters.length > 0 && (
+          <CharacterList
+            characters={characters}
+            info={info}
+            currentPage={currentPage}
+          />
+        )}
+      </section>
+    </div>
+  );
 }
 
-export default App
+export default App;
