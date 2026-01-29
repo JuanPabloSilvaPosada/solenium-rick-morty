@@ -1,8 +1,11 @@
 import CharacterCard from "./CharacterCard";
 import "./CharacterList.css";
 
-const CharacterList = ({ characters, info, currentPage }) => {
+const CharacterList = ({ characters, info, currentPage, onPageChange }) => {
   if (!characters?.length) return null;
+
+  const hasPrevious = currentPage > 1;
+  const hasNext = currentPage < info.pages;
 
   return (
     <div className="character-list">
@@ -21,6 +24,26 @@ const CharacterList = ({ characters, info, currentPage }) => {
           </li>
         ))}
       </ul>
+      {(hasPrevious || hasNext) && (
+        <div className="character-list__pagination">
+          {hasPrevious && (
+            <button
+              className="character-list__pagination-btn"
+              onClick={() => onPageChange(currentPage - 1)}
+            >
+              Anterior
+            </button>
+          )}
+          {hasNext && (
+            <button
+              className="character-list__pagination-btn"
+              onClick={() => onPageChange(currentPage + 1)}
+            >
+              Siguiente
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

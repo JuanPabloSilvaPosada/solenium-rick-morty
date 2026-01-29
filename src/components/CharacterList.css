@@ -56,3 +56,32 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.character-list__pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.character-list__pagination-btn {
+  padding: 12px 24px;
+  font-size: clamp(14px, 1.5vw, 16px);
+  background-color: transparent;
+  color: white;
+  border: 2px solid var(--color-green);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 300ms ease, color 300ms ease;
+  font-family: "WubbaLubbaDubDub", sans-serif;
+}
+
+.character-list__pagination-btn:hover {
+  color: var(--color-cian);
+  border-color: var(--color-cian);
+}
+
+.character-list__pagination-btn:active {
+  border-color: var(--color-cian);
+  color: white;
+}
